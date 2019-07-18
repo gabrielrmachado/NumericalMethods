@@ -13,6 +13,7 @@ def bisection(a, b, max_iter, TOL, counter):
         else:
             p = a + (b-a)/2
             ans = function(p)
+            print("Iter. {0}: f({1}) = {2}".format(counter, p, ans))
             
             if (ans > 0):
                 bisection(a, p, max_iter, TOL, counter)

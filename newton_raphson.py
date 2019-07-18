@@ -16,6 +16,7 @@ def newton_raphson(x, i=0, max_iter = 50, TOL = 0.000000001):
         if (abs(ans) <= TOL):
              print("Root found on iteration {0}.\nf({1}) = {2:.10f}".format(i+1, x, ans))    
         else:
+            print("Iter. {0}: f({1}) = {2}".format(i+1, x, ans))
             x1 = x - (ans/ddx_function(x))    
             i = i + 1
             newton_raphson(x1, i)
