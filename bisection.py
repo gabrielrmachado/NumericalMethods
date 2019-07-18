@@ -21,4 +21,4 @@ def bisection(a, b, max_iter, TOL, counter):
     else:
         print("Number of max iterations reached. No root was found.")
         
-bisection(math.pi, 0, 50, 10e-4, 0)
+bisection(math.pi, 0, 150, 0.0000000001, 0)
