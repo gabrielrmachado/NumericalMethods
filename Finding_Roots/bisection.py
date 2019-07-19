@@ -4,6 +4,7 @@ import numpy as np
 def function(x):
     # return math.pow(math.e, -x) * math.cos(x)
     return ((math.pow(x,3)) - (7*math.pow(x,2)) + (14*x) - 6)
+    # return math.sin(math.cos(math.pow(math.e, x)))
 
 def bisection(a, b, max_iter, TOL, counter):
     if counter < max_iter:
@@ -23,7 +24,9 @@ def bisection(a, b, max_iter, TOL, counter):
                 bisection(a, p, max_iter, TOL, counter)
             else:
                 bisection(p, b, max_iter, TOL, counter)
+        else: 
+            print("F(a) and F(b) must have opposite signs!")
     else:
         print("Number of max iterations reached. No root was found.")
         
-bisection(3.2, 4, 150, 0.001, 0)
+bisection(1, 3.2, 150, 0.001, 0)
