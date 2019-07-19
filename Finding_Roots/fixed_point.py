@@ -5,6 +5,9 @@ def f(x):
     # x^3 + 4*x^2 - 10
     return 0.5 * math.pow((10 - math.pow(x, 3)), 0.5)
 
+    # cos(x) - x
+    # return math.cos(x)
+
 def fixed_point(p0, max_iter, TOL, i = 0):
     if (i < max_iter):
         p = f(p0)
@@ -17,4 +20,4 @@ def fixed_point(p0, max_iter, TOL, i = 0):
     else:
         print("Number of max iterations reached. No root was found.")
 
-fixed_point(1.5, 100, 0.00001)    
+fixed_point(math.pi/4, 100, 0.00001)    
