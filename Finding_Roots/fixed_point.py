@@ -11,6 +11,7 @@ def fixed_point(p0, max_iter, TOL, i = 0):
         if (abs(p - p0) < TOL):
             print("Root found on iteration {0}.\nf({1}) = {2:.10f}".format(i+1, p, abs(p - p0)))
         else:
+            print("Iter. {0}: f({1}) = {2}".format(i+1, p, abs(p - p0)))
             i = i+1
             fixed_point(p, max_iter, TOL, i)
     else:
