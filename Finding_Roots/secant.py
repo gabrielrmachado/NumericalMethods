@@ -4,7 +4,11 @@ def f(x):
     # return math.pow(x, 3) - 20
     # return math.sin(math.cos(math.pow(math.e, x)))
     # return (20*x - math.pow(x,2)) + (20*math.sqrt(x)) - (x*math.sqrt(x)) + (x*math.sqrt(20-x)) + (math.sqrt(x) * math.sqrt(20-x)) - 155.55
-    return math.pow(x, 7) - 1000
+    # return math.pow(x, 7) - 1000
+    # return math.pow(x, 3) - 2 *  math.pow(x, 2) - 5
+    # return math.pow(x, 3) + 3 *  math.pow(x, 2) - 1
+    # return math.pow(x, 3) + math.cos(x)
+    return 2 * math.pow(x, 3) + math.log(x)
 
 def error(x0, x1):
     return abs(x1-x0)/abs(x1)
@@ -25,4 +29,4 @@ def secant(x0, x1, max_iter, TOL, i=0):
     else:
         print("Number of max iterations reached. No root was found.")
 
-secant(2, 3, 100, 0.0001, 0)
+secant(0.5, 1.5, 100, 0.0001, 0)
