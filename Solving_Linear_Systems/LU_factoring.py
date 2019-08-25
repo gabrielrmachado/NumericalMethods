@@ -41,8 +41,8 @@ def get_lu(A, b):
             multiplier = A[j, i] / A[i, i]
             L[j,i] = multiplier
 
-            A[j, :] = (multiplier * A[i, :]) - A[j, :]
-            b[j] = (multiplier * b[i]) - b[j]
+            A[j, :] = (-multiplier * A[i, :]) + A[j, :]
+            b[j] = (-multiplier * b[i]) + b[j]
 
             j = j+1
             
@@ -51,7 +51,7 @@ def get_lu(A, b):
     print("Matrices are equal? {0}".format(np.allclose(np.dot(L, A), O)))
 
 
-A = np.array([[4.,-2.,2.],[-2.,10.,-7.],[2.,-7.,30.]])
-b = np.array([6.,-3.,78.])
+A = np.array([[2.,1.,0.,0.],[-1.,3.,3.,0.],[2.,-2.,1.,4.],[-2.,2.,2.,5.]])
+b = np.array([2., 3., 4., 5.])
 
 get_lu(A,b)

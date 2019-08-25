@@ -28,10 +28,6 @@ def gaussian_partial(A, b):
             temp = np.copy(b[i])
             b[i] = b[maxColIndex+i]
             b[maxColIndex+i] = temp
-            
-            # print(A)
-            # print(b)
-            # print("\n")
 
         # elimination process
         while j < n:
