@@ -4,23 +4,23 @@ np.set_printoptions(suppress=True)
 
 def get_lu(A, b):
     n = len(A)
-    O = np.copy(A)
+    U = np.copy(A)
     L = np.eye(n)
     
     for i in range(n-1):
         j = i+1
 
         # swapping
-        if A[i,i] == 0:
+        if U[i,i] == 0:
             k = i+1
             swapped = False
 
             while k < n:
-                if A[k, i] != 0:
+                if U[k, i] != 0:
                     # swaps 'A's values
-                    temp = np.copy(A[i,:])
-                    A[i,:] = A[k,:]
-                    A[k,:] = temp
+                    temp = np.copy(U[i,:])
+                    U[i,:] = U[k,:]
+                    U[k,:] = temp
 
                     # swaps 'b's values
                     temp = np.copy(b[i])
@@ -38,17 +38,17 @@ def get_lu(A, b):
 
         # elimination process
         while j < n:
-            multiplier = A[j, i] / A[i, i]
+            multiplier = U[j, i] / U[i, i]
             L[j,i] = multiplier
 
-            A[j, :] = (-multiplier * A[i, :]) + A[j, :]
+            U[j, :] = (-multiplier * U[i, :]) + U[j, :]
             b[j] = (-multiplier * b[i]) + b[j]
 
             j = j+1
             
-    print("Original Matrix\n{2}\nMatrix L\n{0}\nMatrix U\n{1}\n\n".format(L, A, O))
-    print(np.dot(L,A))
-    print("Matrices are equal? {0}".format(np.allclose(np.dot(L, A), O)))
+    print("Original Matrix\n{2}\nMatrix L\n{0}\nMatrix U\n{1}\n\n".format(L, U, A))
+    print(np.dot(L,U))
+    print("Matrices are equal? {0}".format(np.allclose(np.dot(L, U), A)))
 
 
 A = np.array([[2.,1.,0.,0.],[-1.,3.,3.,0.],[2.,-2.,1.,4.],[-2.,2.,2.,5.]])
