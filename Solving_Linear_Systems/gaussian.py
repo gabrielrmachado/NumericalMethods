@@ -7,37 +7,47 @@ def gaussian_np(A, b):
     print("Solution 'x'\n{0}".format(x))
 
 
-def gaussian(A, b):
+def gaussian(A, b, pivoting='direct'):
     n = len(A)
     
     for i in range(n-1):
         j = i+1
 
         # swapping
-        if A[i,i] == 0:
-            k = i+1
-            swapped = False
+        if pivoting == 'direct':
+            if A[i,i] == 0:
+                k = i+1
+                swapped = False
 
-            while k < n:
-                if A[k, i] != 0:
-                    # swaps 'A's values
-                    temp = np.copy(A[i,:])
-                    A[i,:] = A[k,:]
-                    A[k,:] = temp
+                while k < n:
+                    if A[k, i] != 0:
+                        # swaps 'A's values
+                        temp = np.copy(A[i,:])
+                        A[i,:] = A[k,:]
+                        A[k,:] = temp
 
-                    # swaps 'b's values
-                    temp = np.copy(b[i])
-                    b[i] = b[k]
-                    b[k] = temp
+                        # swaps 'b's values
+                        temp = np.copy(b[i])
+                        b[i] = b[k]
+                        b[k] = temp
 
-                    swapped = True
-                    break
+                        swapped = True
+                        break
 
-                else:
-                    k = k+1
-            
-            if swapped == False:
-                raise ValueError("No unique solutions")
+                    else:
+                        k = k+1
+                
+                if swapped == False:
+                    raise ValueError("No unique solutions")
+        
+        # elif pivoting == 'partial':
+            # k = i+1
+            # while k < n:
+            #     maxIndex = abs(A[k, :]).argmax()
+            #     temp = np.copy(A[i,:])
+            #     A[i,:] = A[maxIndex,:]
+            #     A[maxIndex,:] = temp
+            #     k = k+1
 
         # elimination process
         while j < n:
@@ -53,18 +63,29 @@ def gaussian(A, b):
 
     # backward substitution
     k = n-1
-
     x = np.zeros(n)
-    x[k] = b[k] / A[k,k]
+    
+    if A[k,k] == 0:
+        raise ValueError("No unique solutions")
+    else:
+        x[k] = b[k] / A[k,k]
 
     while k >= 0:
-        x[k] = (b[k] - np.dot(A[k,k+1:], x[k+1:])) / A[k,k]
-        k = k-1
+        if A[k,k] == 0:
+            raise ValueError("No unique solutions")
+        else:
+            x[k] = (b[k] - np.dot(A[k,k+1:], x[k+1:])) / A[k,k]
+            k = k-1
     
-    print("Answer array 'x'\n{0}".format(x))
+    print("ANSWER ARRAY 'x'\n{0}".format(x))
 
-A = np.array([[1,1,0,1],[2,1,-1,1],[-1,2,3,-1],[3,-1,-1,2]])
-b = np.array([2,1,4,-3])
+A = np.array([[0.4232, -24.72],[0.004,15.73]])
+b = np.array([-20.49, 15.77])
+
+# print(A[1:,1])
+# print(abs(A[1:,1]).argmax())
+
+print("Original matrix 'A'\n{0}\n\nOriginal array 'b'\n{1}\n".format(A, b))
 
 print("NUMPY SOLUTION")
 gaussian_np(A,b)
