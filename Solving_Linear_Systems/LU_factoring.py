@@ -1,4 +1,5 @@
 import numpy as np
+from scipy.linalg import solve_triangular
 
 np.set_printoptions(suppress=True)
 
@@ -47,11 +48,30 @@ def get_lu(A, b):
             j = j+1
             
     print("Original Matrix\n{2}\nMatrix L\n{0}\nMatrix U\n{1}\n\n".format(L, U, A))
-    print(np.dot(L,U))
-    print("Matrices are equal? {0}".format(np.allclose(np.dot(L, U), A)))
+    Ap = np.dot(L,U)
+    print("{0}\nA = L x U? {1}".format(Ap, np.allclose(Ap, A)))
+
+    return L, U, b
+
+def LU_solve(L, U, b):
+    y = solve_triangular(L, b, lower=True)
+    x = solve_triangular(U, y)
+    sol = np.linalg.solve(np.dot(L,U), b)
+
+    print("\nSolution 'x': {0}".format(x))
+    print("Solution 'x' NUMPY: {0}".format(sol))
+
+    print("Solutions are the same? {0}".format(np.allclose(sol, x)))
+    return x
+
+A = np.array([[4.,-20.,-12.],[-8.,45.,44.],[20.,-41.,-24.]])
+b = np.array(np.zeros(A.shape[0]))
+
+L, U, _ = get_lu(A,b)
+
+b = np.array([12.5, 0.2, 6.5])
+LU_solve(L, U, b)
 
 
-A = np.array([[2.,1.,0.,0.],[-1.,3.,3.,0.],[2.,-2.,1.,4.],[-2.,2.,2.,5.]])
-b = np.array([2., 3., 4., 5.])
 
-get_lu(A,b)
+
