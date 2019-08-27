@@ -64,12 +64,15 @@ def LU_solve(L, U, b):
     print("Solutions are the same? {0}".format(np.allclose(sol, x)))
     return x
 
-A = np.array([[4.,-20.,-12.],[-8.,45.,44.],[20.,-41.,-24.]])
+A = np.array([[4.,-1.,1.],[-1.,4.25,2.75],[1.,2.75,3.5]])
 b = np.array(np.zeros(A.shape[0]))
 
 L, U, _ = get_lu(A,b)
 
-b = np.array([12.5, 0.2, 6.5])
+b = np.array([1.,1.,-3.])
+LU_solve(L, U, b)
+
+b = np.array([8.,7.,14.])
 LU_solve(L, U, b)
 
 
