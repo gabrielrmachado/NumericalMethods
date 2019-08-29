@@ -39,8 +39,8 @@ def LU_solve(L, U, b):
     print("Solutions are the same? {0}".format(np.allclose(sol, x)))
     return x
     
-A = np.array([[4.,-2.,2.],[-2.,10.,-7.],[2.,-7.,30.]])
+A = np.array([[4.,1.,1.,1.],[1.,3.,-1.,1.],[1.,-1.,2.,0.],[1.,1.,0.,2.]])
 L, Lt = cholesky_factorization(A)
-b = [6.,-3.,78.]
+b = [6.,-3.,78.,4.5]
 
 x = LU_solve(L, Lt, b)
