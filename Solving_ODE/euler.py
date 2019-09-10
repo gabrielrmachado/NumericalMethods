@@ -13,7 +13,6 @@ def euler_method(a, b, h, y_0):
     a: lower number in interval
     b: higher number in interval
     h: step size
-    F_d: y' (given derivative)
     y_0: point 'y' from initial condition 
     """
     ti = a
